@@ -8,12 +8,12 @@ package com.mycompany.anwalt_sys;
  *
  * @author Dell
  */
-public class ClientGUI extends javax.swing.JFrame {
+public class SecretaryGUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form ClientGUI
+     * Creates new form SecretaryGUI
      */
-    public ClientGUI() {
+    public SecretaryGUI() {
         initComponents();
     }
 
@@ -26,21 +26,60 @@ public class ClientGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        BtnClient = new javax.swing.JToggleButton();
+        BtnLawyer = new javax.swing.JToggleButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        BtnClient.setText("Klient");
+        BtnClient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnClientActionPerformed(evt);
+            }
+        });
+
+        BtnLawyer.setText("Anwalt");
+        BtnLawyer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnLawyerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(BtnClient)
+                .addGap(35, 35, 35)
+                .addComponent(BtnLawyer)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnClient)
+                    .addComponent(BtnLawyer))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnLawyerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLawyerActionPerformed
+        RO_LawyerGUI ro_lawyergui = new RO_LawyerGUI();
+        ro_lawyergui.show();
+
+    }//GEN-LAST:event_BtnLawyerActionPerformed
+
+    private void BtnClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnClientActionPerformed
+        RO_ClientGUI ro_clientgui = new RO_ClientGUI();
+                ro_clientgui.show();
+        
+    }//GEN-LAST:event_BtnClientActionPerformed
 
     /**
      * @param args the command line arguments
@@ -59,24 +98,26 @@ public class ClientGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ClientGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SecretaryGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ClientGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SecretaryGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ClientGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SecretaryGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ClientGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SecretaryGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ClientGUI().setVisible(true);
+                new SecretaryGUI().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton BtnClient;
+    private javax.swing.JToggleButton BtnLawyer;
     // End of variables declaration//GEN-END:variables
 }

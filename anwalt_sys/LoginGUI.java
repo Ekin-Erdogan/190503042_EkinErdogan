@@ -6,9 +6,11 @@ package com.mycompany.anwalt_sys;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
 import javax.swing.*;
 
 /**
@@ -16,7 +18,12 @@ import javax.swing.*;
  * @author Dell
  */
 public class LoginGUI extends javax.swing.JFrame {
-
+    DbHelper helper = new DbHelper();
+    Connection connection= null;
+    PreparedStatement pst = null;
+    ResultSet rs =null;
+   
+    
     /**
      * Creates new form LoginGUI
      */
@@ -35,10 +42,10 @@ public class LoginGUI extends javax.swing.JFrame {
 
         LblEmail = new javax.swing.JLabel();
         LblPassword = new javax.swing.JLabel();
-        TxtPassword = new javax.swing.JPasswordField();
         BtnLogin = new javax.swing.JToggleButton();
         BtnReset = new javax.swing.JToggleButton();
         TxtEmail = new javax.swing.JTextField();
+        TxtPassword = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,12 +54,6 @@ public class LoginGUI extends javax.swing.JFrame {
 
         LblPassword.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         LblPassword.setText("Password");
-
-        TxtPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtPasswordActionPerformed(evt);
-            }
-        });
 
         BtnLogin.setBackground(new java.awt.Color(204, 255, 204));
         BtnLogin.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -87,7 +88,7 @@ public class LoginGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(BtnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                         .addComponent(BtnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,9 +98,9 @@ public class LoginGUI extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(LblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(TxtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(TxtPassword))))
                 .addGap(62, 62, 62))
         );
         layout.setVerticalGroup(
@@ -123,38 +124,44 @@ public class LoginGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TxtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtPasswordActionPerformed
-
     private void BtnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLoginActionPerformed
         // TODO add your handling code here:
+        
+       
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection= DriverManager.getConnection("jdbc:mysql://localhost:3306/anwalt_sys","root","12345");
             String emailAddress = TxtEmail.getText();
-            char[] password = TxtPassword.getPassword();
+            String password = TxtPassword.getText();
             
             Statement statement = connection.createStatement();
-            String sql ="select * from user where emailAddress='"+emailAddress+"'and password = '"+password+"'";
+            String sql ="select * from user where emailAddress='"+emailAddress+"' and password = '"+password+"'";
             ResultSet rs= statement.executeQuery(sql);
             
             if(rs.next()){
                 
                 dispose();
-                String role = rs.getString("role");
-                if(role == "admin"){
-                    AdminGUI admingui = new AdminGUI();
-                    admingui.show();
-          
-                }else if(role == "secretary"){
-                    SecretaryGUI secretarygui = new SecretaryGUI();
-                    secretarygui.show();
-                    
-                }else if (role == "lawyer"){
-                    LawyerGUI lawyergui = new LawyerGUI();
-                    lawyergui.show();
+
+                
+                int userId = rs.getInt("userId");
+                
+                if(null != rs.getString("role")) switch (rs.getString("role")) {
+                    case "admin" -> {
+                        AdminGUI admingui = new AdminGUI();
+                        admingui.show();
+                    }
+                    case "secretary" -> {
+                        SecretaryGUI secretarygui = new SecretaryGUI();
+                        secretarygui.show();
+                    }
+                    case "lawyer" -> {
+                        LawyerGUI lawyergui = new LawyerGUI(userId);
+                        lawyergui.show();
+                    }
+                    default -> {
+                    }
                 }
+                
                   
             }else{
                 JOptionPane.showMessageDialog(this, "E-Mail oder Passwort ist nicht gültig.");
@@ -223,6 +230,6 @@ public class LoginGUI extends javax.swing.JFrame {
     private javax.swing.JLabel LblEmail;
     private javax.swing.JLabel LblPassword;
     private javax.swing.JTextField TxtEmail;
-    private javax.swing.JPasswordField TxtPassword;
+    private javax.swing.JTextField TxtPassword;
     // End of variables declaration//GEN-END:variables
 }

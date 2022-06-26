@@ -10,8 +10,17 @@ package com.mycompany.anwalt_sys;
  */
 public class Cases {
 
-    public Cases() {
-
+    public Cases(int caseId, String description, String category, String nameDefendant, String namePlaintiff, String datum, String historicalData, String nameLawyer, int userId, int clientId) {
+        this.caseId = caseId;
+        this.description = description;
+        this.category = category;
+        this.nameDefendant = nameDefendant;
+        this.namePlaintiff = namePlaintiff;
+        this.datum = datum;
+        this.historicalData = historicalData;
+        this.nameLawyer = nameLawyer;
+        this.userId = userId;
+        this.clientId = clientId;
     }
 
     private int caseId;
@@ -24,6 +33,10 @@ public class Cases {
     private String nameLawyer;
     private int userId;
     private int clientId;
+
+    Cases() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
     public int getCaseId() {
         return caseId;

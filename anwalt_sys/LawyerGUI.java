@@ -8,13 +8,21 @@ package com.mycompany.anwalt_sys;
  *
  * @author Dell
  */
-public class LawyerGUI extends javax.swing.JFrame {
+public class LawyerGUI extends javax.swing.JFrame  {
 
-    /**
-     * Creates new form LawyerGUI
-     */
+
     public LawyerGUI() {
+        
+       
+       
         initComponents();
+        
+       
+    }
+    int userId;
+    LawyerGUI(int userId){
+        initComponents();
+        this.userId= userId;
     }
 
     /**
@@ -26,19 +34,24 @@ public class LawyerGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
+        BtnClient = new javax.swing.JToggleButton();
+        BtnCase = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jToggleButton1.setText("Client");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnClient.setText("Klient");
+        BtnClient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                BtnClientActionPerformed(evt);
             }
         });
 
-        jToggleButton2.setText("Case");
+        BtnCase.setText("Fall");
+        BtnCase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCaseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -46,9 +59,9 @@ public class LawyerGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                .addComponent(BtnClient, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnCase, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
         layout.setVerticalGroup(
@@ -56,17 +69,24 @@ public class LawyerGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton1)
-                    .addComponent(jToggleButton2))
+                    .addComponent(BtnClient)
+                    .addComponent(BtnCase))
                 .addContainerGap(81, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    private void BtnClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnClientActionPerformed
+        ClientGUI clientgui = new ClientGUI();
+        clientgui.show();
+    }//GEN-LAST:event_BtnClientActionPerformed
+
+    private void BtnCaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCaseActionPerformed
+
+        CaseGUI casegui = new CaseGUI(userId);
+        casegui.show();
+    }//GEN-LAST:event_BtnCaseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -104,7 +124,7 @@ public class LawyerGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JToggleButton BtnCase;
+    private javax.swing.JToggleButton BtnClient;
     // End of variables declaration//GEN-END:variables
 }

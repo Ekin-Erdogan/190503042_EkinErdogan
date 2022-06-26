@@ -8,28 +8,40 @@ package com.mycompany.anwalt_sys;
  *
  * @author Dell
  */
-public class User {
+public class Client {
 
-    public User() {
-       
-
+    public Client(int clientId, String name, String lastName, String tc, String job, String gender, String telephoneNumber, String address, String emailAddress) {
+        this.clientId = clientId;
+        this.name = name;
+        this.lastName = lastName;
+        this.tc = tc;
+        this.job = job;
+        this.gender = gender;
+        this.telephoneNumber = telephoneNumber;
+        this.address = address;
+        this.emailAddress = emailAddress;
     }
-    private int userId;
+    private int clientId;
     private String name;
     private String lastName;
     private String tc;
-    private String role;
+    private String job;
+    private String gender;
     private String telephoneNumber;
     private String address;
     private String emailAddress;
-    private String password;
 
-    public int getUserId() {
-        return userId;
+    Client() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+   
+    public int getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
     }
 
     public String getName() {
@@ -56,12 +68,20 @@ public class User {
         this.tc = tc;
     }
 
-    public String getRole() {
-        return role;
+    public String getJob() {
+        return job;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setJob(String job) {
+        this.job = job;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getTelephoneNumber() {
@@ -87,13 +107,4 @@ public class User {
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
 }
