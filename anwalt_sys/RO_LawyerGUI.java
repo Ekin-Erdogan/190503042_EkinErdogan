@@ -43,11 +43,12 @@ public class RO_LawyerGUI extends javax.swing.JFrame {
 
     }
     public void updateDB() throws SQLException{
+       
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/anwalt_sys", "root", "12345");
-            pst = connection.prepareStatement("select (userId, name, lastName, tc, telephoneNumber, address, emailAddress )from user where role = 'lawyer'");
+            pst = connection.prepareStatement("select userId, name, lastName, tc, telephoneNumber, address, emailAddress from user where role = 'lawyer'");
             rs = pst.executeQuery();
             ResultSetMetaData rsmd= rs.getMetaData();
             column= rsmd.getColumnCount();
@@ -60,7 +61,7 @@ public class RO_LawyerGUI extends javax.swing.JFrame {
                     columnData.add(rs.getString("name"));
                     columnData.add(rs.getString("lastName"));
                     columnData.add(rs.getString("tc"));
-                    columnData.add(rs.getString("role"));
+                   
                     columnData.add(rs.getString("telephoneNumber"));
                     columnData.add(rs.getString("address"));
                     columnData.add(rs.getString("emailAddress"));
@@ -70,12 +71,13 @@ public class RO_LawyerGUI extends javax.swing.JFrame {
                 model.addRow(columnData);
             }
             
-        } catch (ClassNotFoundException ex) {
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null,ex);
         }
 
     }
-
+    
+ 
 
 
     /**
